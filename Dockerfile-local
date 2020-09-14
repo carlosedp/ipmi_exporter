@@ -1,0 +1,14 @@
+# Container image
+FROM ubuntu:18.04
+ARG TARGETARCH
+ARG TARGETOS
+WORKDIR /
+RUN apt-get update \
+    && apt-get install freeipmi-tools -y --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
+ADD ipmi-exporter-$TARGETOS-$TARGETARCH /bin/ipmi_exporter
+
+EXPOSE 9290
+ENTRYPOINT ["/bin/ipmi_exporter"]
+CMD ["--config.file", "/config.yml"]

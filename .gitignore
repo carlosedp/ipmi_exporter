@@ -1,2 +1,3 @@
 ipmi_exporter
+ipmi-exporter-*
 *.tar.gz
